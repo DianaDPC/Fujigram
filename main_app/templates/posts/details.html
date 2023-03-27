@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}">
+<br>
+{{post.camera_used}}
+<br>
+{{post.msg_body}}
+
+
+{% endblock %}
