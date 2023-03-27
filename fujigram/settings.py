@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'fujigram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+
         'NAME': 'fujigram'
     }
 }
@@ -125,8 +126,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_STORAGE_BUCKET_NAME = 'fujigrampost'
 
 AWS_QUERYSTRING_AUTH = False
+
