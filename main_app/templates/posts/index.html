@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for post in posts %}
+
+    <a href="{% url 'post_details' post.id %}"><img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}"></a>
+
+{% endfor %}
+
+{% endblock %}
