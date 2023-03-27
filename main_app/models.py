@@ -14,17 +14,8 @@ ISO = (
     ('800','800'), 
     ('1600','1600'), 
     ('3200','3200'), 
-    ('6400','6400')
-)
-WHITE_BALANCE = (
-    ('Custom','Custom'),
-    ('Daylight','Daylight'),
-    ('Shade','Shade'),
-    ('Fluorescent Light 1','Fluorescent Light 1'),
-    ('Fluorescent Light 2','Fluorescent Light 2'),
-    ('Fluorescent Light 3','Fluorescent Light 3'),
-    ('Incandescent','Incandescent'),
-    ('Underwater','Underwater')
+    ('6400','6400'),
+    ('12800','12800')
 )
 COLOR_CHROME_EFFECT = (
     ('Off','Off'),
@@ -85,34 +76,43 @@ class Recipe(models.Model):
     film_simulation = models.CharField(max_length=20, choices=FILM_SIMULATION)
     monochromatic_color_WC = models.IntegerField(default=0, validators=[MinValueValidator(-9), MaxValueValidator(9)])
     monochromatic_color_MG = models.IntegerField(default=0, validators=[MinValueValidator(-9), MaxValueValidator(9)])
-    highlight_tone = models.IntegerField(default=0, validators=[MinValueValidator(-2), MaxValueValidator(2)])
-    shadow_tone = models.IntegerField(default=0, validators=[MinValueValidator(-2), MaxValueValidator(2)])
+    highlight_tone = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
+    shadow_tone = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
     color = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
     noise_reduction = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
     clarity = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
     grain_effect = models.CharField(max_length=6, choices=GRAIN_EFFECT)
     grain_size = models.CharField(max_length=5, choices=GRAIN_SIZE)
     color_chrome_effect = models.CharField(max_length=6, choices=COLOR_CHROME_EFFECT)
-    white_balance = models.CharField(max_length=20, choices=WHITE_BALANCE)
-    white_balance_shift = models.IntegerField(default=0, validators=[MinValueValidator(-9), MaxValueValidator(9)])
-    color_saturation = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
+    white_balance = models.CharField(max_length=50)
+    white_balance_shift_red = models.IntegerField(default=0, validators=[MinValueValidator(-9), MaxValueValidator(9)])
+    white_balance_shift_blue = models.IntegerField(default=0, validators=[MinValueValidator(-9), MaxValueValidator(9)])
     sharpness = models.IntegerField(default=0, validators=[MinValueValidator(-4), MaxValueValidator(4)])
     long_exposure_nr = models.BooleanField()
     lens_modulation_optimizer = models.BooleanField()
     color_space = models.CharField(max_length=9, choices=COLOR_SPACE)
-    iso = models.CharField(max_length=4, choices=ISO)
-    exposure_compensation = models.IntegerField(default=0, validators=[MinValueValidator(-5), MaxValueValidator(5)])
+    iso = models.CharField(max_length=5, choices=ISO)
+    exposure_compensation = models.CharField(max_length=12)
+
+    def __str__(self):
+        return self.name
 
 class Post(models.Model):
     user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     recipe_id = models.ForeignKey(Recipe, null=True, on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True)
     camera_used = models.CharField(max_length=100)
-    photo_url = models.CharField(max_length=200)
+    photo = models.FileField(upload_to='media/')
     msg_body = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.msg_body
 
 class Comment(models.Model):
     user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     post_id = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True)
     msg_body = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.msg_body
