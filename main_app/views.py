@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.forms import ModelForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-# to be implemented later with other routes
-# from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.mixins import LoginRequiredMixin 
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .models import Recipe, Post, Comment
+
 
 def home(request):
   return render(request, 'home.html')
+
+def posts_index(request):
+  posts = Post.objects.all()
+  return render(request, 'posts/index.html', { 'posts': posts })
+
+def posts_detail(request, post_id):
+  post = Post.objects.get(id=post_id)
+  return render(request, 'posts/detail.html', { 'post': post })
 
 def signup(request):
   error_message = ''
