@@ -69,6 +69,10 @@ class RecipeCreate(CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+  
+def recipes_index(request):
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/index.html',{'recipes':recipes})
 
 def comment_add(request, post_id):
   form = CommentForm(request.POST)
@@ -87,3 +91,13 @@ class CommentUpdate(UpdateView):
 class CommentDelete(DeleteView):
   model = Comment
   success_url = '/posts/'
+
+class RecipeUpdate(UpdateView):
+  model = Recipe
+  fields = ['name','sensor','dynamic_range','film_simulation','monochromatic_color_WC','monochromatic_color_MG','highlight_tone','shadow_tone','color','noise_reduction','clarity','grain_effect','grain_size','color_chrome_effect','white_balance','white_balance_shift_red','white_balance_shift_blue','sharpness','long_exposure_nr','lens_modulation_optimizer','color_space','iso','exposure_compensation']
+  success_url = '/posts/'
+
+class RecipeDelete(DeleteView):
+  model = Recipe
+  success_url = '/posts/'
+
