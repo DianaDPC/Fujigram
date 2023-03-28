@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{post.user_id}}
+{{post.user}}
 <br>
 <img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}">
 <br>
@@ -13,14 +13,17 @@
 
     <br>
     <br>
-    {{comment.user_id}}
+    {{comment.user}}
     <br>
     {{comment.msg_body}}
+    <br>
+    <a href="{% url 'comment_update' post.id comment.id %}">Edit </a>
+    <a href="{% url 'comment_delete' post.id comment.id %}"> Delete</a>
 
 {% endfor %}
 <br>
 <br>
-<form action="{% url 'add_comment' post.id %}" method="post">
+<form action="{% url 'comment_add' post.id %}" method="post">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <input type="submit" class="btn" value="Submit Comment">

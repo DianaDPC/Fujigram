@@ -140,6 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_STORAGE_BUCKET_NAME = 'fujigrampost'
+AWS_STORAGE_BUCKET_NAME = 'guineapigcollector'
 
 AWS_QUERYSTRING_AUTH = False

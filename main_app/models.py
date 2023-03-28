@@ -70,7 +70,7 @@ SENSOR = (
 
 # Create your models here.
 class Recipe(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     sensor = models.CharField(max_length=12, choices=SENSOR)
     dynamic_range = models.CharField(max_length=7, choices=DYNAMIC_RANGE)
@@ -102,8 +102,8 @@ class Recipe(models.Model):
         return reverse('home')
 
 class Post(models.Model):
-    user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    recipe_id = models.ForeignKey(Recipe, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    recipe = models.ForeignKey(Recipe, null=True, on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True)
     camera_used = models.CharField(max_length=100)
     photo = models.FileField(upload_to='media/')
@@ -113,8 +113,8 @@ class Post(models.Model):
         return self.msg_body
 
 class Comment(models.Model):
-    user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    post_id = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True)
     msg_body = models.CharField(max_length=300)
 
