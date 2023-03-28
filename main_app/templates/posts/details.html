@@ -5,9 +5,14 @@
 <br>
 <img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}">
 <br>
-{{post.camera_used}}
+Recipe: {{post.recipe}}
+<br>
+Camera: {{post.camera_used}}
 <br>
 {{post.msg_body}}
+<br>
+<a href="{% url 'post_update' post.id %}">Edit </a>
+<a href="{% url 'post_delete' post.id %}"> Delete</a>
 
 {% for comment in comments %}
 
