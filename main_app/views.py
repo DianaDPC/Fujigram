@@ -69,6 +69,10 @@ class RecipeCreate(CreateView):
   def form_valid(self, form):
     form.instance.user_id = self.request.user
     return super().form_valid(form)
+  
+def recipes_index(request):
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/index.html',{'recipes':recipes})
 
 def add_comment(request, post_id):
   form = CommentForm(request.POST)
