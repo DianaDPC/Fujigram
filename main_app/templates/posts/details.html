@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{{post.user_id}}
+<br>
 <img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}">
 <br>
 {{post.camera_used}}
 <br>
 {{post.msg_body}}
+
+{% for comment in comments %}
+
+    <br>
+    <br>
+    {{comment.user_id}}
+    <br>
+    {{comment.msg_body}}
+
+{% endfor %}
+<br>
+<br>
+<form action="{% url 'add_comment' post.id %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" class="btn" value="Submit Comment">
+</form>
 
 
 {% endblock %}

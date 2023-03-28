@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import Recipe, Post, Comment
+from .forms import CommentForm
 
 
 def home(request):
@@ -39,12 +40,18 @@ def posts_index(request):
 
 def post_details(request, post_id):
   post=Post.objects.get(id=post_id)
-  return render(request, 'posts/details.html', {'post':post})
+  comments=post.comment_set.all()
+  comment_form = CommentForm()
+  return render(request, 'posts/details.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
 
 class PostCreate(CreateView):
   model = Post
   fields = ['camera_used', 'photo', 'msg_body']
   success_url = '/posts/'
+
+  def form_valid(self, form):
+    form.instance.user_id = self.request.user
+    return super().form_valid(form)
 
 class PostUpdate(UpdateView):
   model = Post
@@ -62,3 +69,12 @@ class RecipeCreate(CreateView):
   def form_valid(self, form):
     form.instance.user_id = self.request.user
     return super().form_valid(form)
+
+def add_comment(request, post_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+    new_comment = form.save(commit=False)
+    new_comment.post_id_id = post_id
+    new_comment.user_id_id = request.user.id
+    new_comment.save()
+    return redirect('post_details', post_id=post_id)
