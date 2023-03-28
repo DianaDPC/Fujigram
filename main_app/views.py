@@ -95,9 +95,9 @@ class CommentDelete(DeleteView):
 class RecipeUpdate(UpdateView):
   model = Recipe
   fields = ['name','sensor','dynamic_range','film_simulation','monochromatic_color_WC','monochromatic_color_MG','highlight_tone','shadow_tone','color','noise_reduction','clarity','grain_effect','grain_size','color_chrome_effect','white_balance','white_balance_shift_red','white_balance_shift_blue','sharpness','long_exposure_nr','lens_modulation_optimizer','color_space','iso','exposure_compensation']
-  success_url = '/posts/'
+  success_url = '/recipes/'
 
 class RecipeDelete(DeleteView):
   model = Recipe
-  success_url = '/posts/'
+  success_url = '/recipes/'
 
