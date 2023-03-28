@@ -111,6 +111,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.msg_body
+    
+    def get_absolute_url(self):
+        return reverse('post_details', kwargs={'post_id': self.id})
 
 class Comment(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -120,3 +123,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.msg_body
+    
+    def get_absolute_url(self):
+        return reverse('post_details', kwargs={'post_id': self.post.id})

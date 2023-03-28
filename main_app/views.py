@@ -3,8 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Recipe, Post, Comment
 from .forms import CommentForm
 
@@ -18,6 +18,7 @@ def posts_index(request):
 
 def posts_detail(request, post_id):
   post = Post.objects.get(id=post_id)
+  print(post)
   return render(request, 'posts/detail.html', { 'post': post })
 
 def signup(request):
@@ -44,25 +45,32 @@ def post_details(request, post_id):
   comment_form = CommentForm()
   return render(request, 'posts/details.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
   model = Post
-  fields = ['camera_used', 'photo', 'msg_body']
+  fields = ['camera_used', 'photo', 'msg_body', 'recipe']
   success_url = '/posts/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
   model = Post
   fields = ['camera_used', 'msg_body']
-  success_url = '/posts/'
 
-class PostDelete(DeleteView):
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.user
+
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
   model = Post
   success_url = '/posts/'
+
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.user
   
-class RecipeCreate(CreateView):
+class RecipeCreate(LoginRequiredMixin, CreateView):
   model = Recipe
   fields = ['name','sensor','dynamic_range','film_simulation','monochromatic_color_WC','monochromatic_color_MG','highlight_tone','shadow_tone','color','noise_reduction','clarity','grain_effect','grain_size','color_chrome_effect','white_balance','white_balance_shift_red','white_balance_shift_blue','sharpness','long_exposure_nr','lens_modulation_optimizer','color_space','iso','exposure_compensation']
 
@@ -83,21 +91,35 @@ def comment_add(request, post_id):
     new_comment.save()
     return redirect('post_details', post_id=post_id)
   
-class CommentUpdate(UpdateView):
+class CommentUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
   model = Comment
   fields = ['msg_body']
-  success_url = '/posts/'
 
-class CommentDelete(DeleteView):
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.user
+
+class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
   model = Comment
   success_url = '/posts/'
 
-class RecipeUpdate(UpdateView):
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.user
+
+class RecipeUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
   model = Recipe
   fields = ['name','sensor','dynamic_range','film_simulation','monochromatic_color_WC','monochromatic_color_MG','highlight_tone','shadow_tone','color','noise_reduction','clarity','grain_effect','grain_size','color_chrome_effect','white_balance','white_balance_shift_red','white_balance_shift_blue','sharpness','long_exposure_nr','lens_modulation_optimizer','color_space','iso','exposure_compensation']
   success_url = '/recipes/'
 
-class RecipeDelete(DeleteView):
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.user
+
+class RecipeDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
   model = Recipe
   success_url = '/recipes/'
 
+  def test_func(self):
+    obj = self.get_object()
+    return obj.user == self.request.use
