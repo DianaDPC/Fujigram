@@ -11,5 +11,7 @@ urlpatterns = [
     path('posts/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),
     path('posts/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
     # recipe paths
-    path('recipe/create',views.RecipeCreate.as_view(), name='recipes_create'),
+    path('recipes/', views.recipes_index, name='recipes_index'),
+    path('recipes/create',views.RecipeCreate.as_view(), name='recipes_create'),
+    
 ]

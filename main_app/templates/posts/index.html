@@ -6,7 +6,7 @@
 <div class="card-columns"></div>
 {% for post in posts %}
   <div class="card">
-    <a class="card-img-top" href="{% url 'post_details' post.id %}"><img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}"></a>
+    <a class="card-img-top" href="{% url 'post_details' post.id %}"><img src="https://fujigrampost.s3.ca-central-1.amazonaws.com/{{ post.photo }}"></a>
   </div>
 {% endfor %}
 
