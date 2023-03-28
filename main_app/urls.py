@@ -14,4 +14,8 @@ urlpatterns = [
     path('posts/<int:post_id>/add_comment/', views.add_comment, name='add_comment'),
     # recipe paths
     path('recipe/create',views.RecipeCreate.as_view(), name='recipes_create'),
+    path('recipe/<int:pk>/update/', views.RecipeUpdate.as_view(), name='recipes_update'),
+    path('recipe/<int:pk>/delete/', views.RecipeDelete.as_view(), name='recipes_delete'),
+    # comments paths
+  
 ]
