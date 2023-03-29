@@ -11,7 +11,7 @@ from .forms import CommentForm
 
 
 def home(request):
-  return render(request, 'registration/login.html')
+  return render(request, 'home.html')
 
 @login_required
 def posts_index(request):
