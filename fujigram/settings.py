@@ -130,6 +130,7 @@ STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = '/posts/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+SIGNUP_REDIRECT_URL = '/posts/'
 
 
 # Default primary key field type
