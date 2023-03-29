@@ -1,16 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if object %}
-    <h1>Edit {{object.name}}</h1>
-  {% else %}
-    <h1>Create Post</h1>
-  {% endif %}
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" class="btn">
-  </form>
+
+<section style=" height: 100vh; background-image: url('https://i.imgur.com/o7BrUvQ.jpg');" class="text-center">
+
+<div class="p-5 bg-image" ></div>
+  <div class="card mx-md-5 shadow-2-strong" style="margin-top: -50px; background: hsla(0, 0%, 100%, 0.4); backdrop-filter: blur(30px); ">
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          {% if object %}
+          <h1>Edit {{object.name}}</h1>
+        {% else %}
+          <h1>Create Post</h1>
+        {% endif %}
+            <div class="form-outline mb-4 text-center">
+              <form style="text-align:justify; margin-top: 10px;" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                  {{ form.as_table }}
+                </table>
+                <input type="submit" value="Submit" class="btn btn-secondary">
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
+
+
+
+<!-- {% if object %}
+<h1>Edit {{object.name}}</h1>
+{% else %}
+<h1>Create Post</h1>
+{% endif %}
+<div >
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" value="Submit" class="btn">
+</form>
+</div> -->
