@@ -132,3 +132,8 @@ def search_index(request):
     search=SearchVector('name', 'sensor'),
     ).get(search=q).post_set.all()
   return render(request, 'posts/index.html', {'posts':posts}) # 'posts/search.html' after maybe?
+
+@login_required
+def recipe_details(request, recipe_id):
+  recipe=Recipe.objects.get(id=recipe_id)
+  return render(request, 'recipes/details.html', {'recipe': recipe})

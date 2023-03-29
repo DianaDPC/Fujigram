@@ -5,15 +5,15 @@
 <div class="card-columns container-fluid">
 <div class="row justify-content-center">
 {% for recipe in recipes %}
+
   <div class="card p-3" style= "height: 200px; width: 200px;" >
     <div class="card-body">
-      <h5 class="card-title">{{ recipe.name }}</h5>
+      <a style="color: black;" href="{% url 'recipe_details' recipe.id %}"><h5 class="card-title">{{ recipe.name }}</h5></a>
       <p class="card-text">Sensor Type: {{ recipe.sensor }}</p>
       {% if recipe.user == request.user %}
       <a class=" btn btn-sm btn-secondary" style="text-decoration: none; color: black;" href="{% url 'recipes_update' recipe.id %}">Edit </a>
       <a class=" btn btn-sm btn-secondary" style="text-decoration: none; color: black;" href="{% url 'recipes_delete' recipe.id %}"> Delete</a>  
       {% endif %}
-     
     </div>
   </div>
 {% endfor %}
