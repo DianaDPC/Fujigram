@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.postgres.search import SearchVector
 from .models import Recipe, Post, Comment
 from .forms import CommentForm
 
@@ -122,4 +123,15 @@ class RecipeDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
   def test_func(self):
     obj = self.get_object()
-    return obj.user == self.request.use
+    return obj.user == self.request.user
+
+def search_index(request):
+  q=request.GET.get('query')
+  posts=Post.objects.annotate(
+  search=SearchVector('camera_used'),
+  ).filter(search=q)
+  if (len(posts) < 1):
+    posts=Recipe.objects.annotate(
+    search=SearchVector('name', 'sensor'),
+    ).get(search=q).post_set.all()
+  return render(request, 'posts/index.html', {'posts':posts})
