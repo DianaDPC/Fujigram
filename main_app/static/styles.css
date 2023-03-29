@@ -1,3 +1,7 @@
 .card {
     display: inline-block;
 }
+
+.img-height {
+    max-height: 95vh;
+}

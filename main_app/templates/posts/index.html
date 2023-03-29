@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Posts</h1>
-
-<div class="card-columns"></div>
-{% for post in posts %}
-  <div class="card">
-    <a class="card-img-top" href="{% url 'post_details' post.id %}"><img src="https://guineapigcollector.s3.amazonaws.com/{{ post.photo }}"></a>
+<div class="container">
+  <div class="row m-5">
+    <h1></h1>
   </div>
-{% endfor %}
+  {% for post in posts %}
+  <div class="row ">
+    <div class="row m-5">
+        <div class="col-3">
+          <div class="card w-100 text-center">
+            <div class="card-header">{{post.user}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{post.camera_used}}</h5>
+              <p class="card-text">{{post.msg_body}}</p>
+              <a href="" class="btn">Recipe</a>
+            </div>
+            <div class="card-footer text-muted">{{post.date_created}}</div>
+          </div>
+        </div>
+        <div class="col" id="posts_spacing">
+          <a href="{% url 'post_details' post.id %}"><img class="img-fluid rounded img-height" src="https://fujigrampost.s3.ca-central-1.amazonaws.com/{{ post.photo }}"></a>
+        </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
 
 {% endblock %}
-
-</div>
