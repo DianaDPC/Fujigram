@@ -8,6 +8,8 @@
     <div class="card-body">
       <h5 class="card-title">{{ recipe.name }}</h5>
       <p class="card-text">Sensor Type: {{ recipe.sensor }}</p>
+      <a href="{% url 'recipes_update' recipe.id %}">Edit </a>
+      <a href="{% url 'recipes_delete' recipe.id %}"> Delete</a>  
     </div>
   </div>
 {% endfor %}

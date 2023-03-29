@@ -129,8 +129,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_app/static')]
 
-LOGIN_REDIRECT_URL = '/posts'
+
+LOGIN_REDIRECT_URL = '/posts/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+SIGNUP_REDIRECT_URL = '/posts/'
 
 
 # Default primary key field type
