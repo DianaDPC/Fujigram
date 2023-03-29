@@ -9,31 +9,48 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
     <title>Fujigram</title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Fujigram</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <div class="navbar-nav mr-auto">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn" type="submit">Search</button>
-                </form>
+        <nav class="navbar navbar-expand" style="background: #EEE9DA;">
+            <div class="container">
+                <a href="{% url 'posts_index' %}" class="navbar-brand">Fujigram</a>
+                <div >
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <span class="input-group-text border-0" id="search-addon">
+                          <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                </div>
+                <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <a class='fa fa-plus-circle fa-2x' href="{% url 'recipes_create' %}">Add a Recipe</a>
-                    <a class='fa fa-plus-circle fa-2x' href="{% url 'post_create' %}">Create a post</a>
-                    <a href="{% url 'recipes_index' %}">View Recipes</a>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <li class="nav-item">
+                         <a class='nav-link' href="{% url 'recipes_create' %}">Add Recipe</a>
+                    </li>
+                    <li class="nav-item">
+                         <a class='nav-link' href="{% url 'post_create' %}">Add post</a>
+                   </li>
+                   <li class="nav-item">
+                        <a class='nav-link' href="{% url 'recipes_index' %}">All Recipes</a>
+                   </li>
+                   <li class="nav-item">
+                        <a class='nav-link' href="{% url 'logout' %}">Logout</a>
+                   </li>
                     {% else %}
-                    <a href="{% url 'login' %}">Log In</a>
-                    <a href="{% url 'signup' %}">Sign Up</a>
+                   <li class="nav-item">
+                        <a class='nav-link' href="{% url 'login' %}">Log In</a>
+                   </li>
+                   <li class="nav-item">
+                        <a class='nav-link' href="{% url 'signup' %}">Sign Up</a>
+                   </li>
                     {% endif %}
-              </div>
+                </ul>
             </div>
-          </nav>
+        </nav>
     </header>
     <main>
         {% block content %}
@@ -41,3 +58,10 @@
     </main>
 </body>
 </html>
+
+
+
+
+
+
+
