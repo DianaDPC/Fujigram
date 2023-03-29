@@ -11,8 +11,10 @@ Camera: {{post.camera_used}}
 <br>
 {{post.msg_body}}
 <br>
+{% if post.user == request.user %}
 <a href="{% url 'post_update' post.id %}">Edit </a>
 <a href="{% url 'post_delete' post.id %}"> Delete</a>
+{% endif %}
 
 {% for comment in comments %}
 
