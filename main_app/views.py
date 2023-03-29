@@ -130,4 +130,4 @@ def search_index(request):
     posts=Recipe.objects.annotate(
     search=SearchVector('name', 'sensor'),
     ).get(search=q).post_set.all()
-  return render(request, 'posts/index.html', {'posts':posts})
+  return render(request, 'posts/index.html', {'posts':posts}) # 'posts/search.html' after maybe?

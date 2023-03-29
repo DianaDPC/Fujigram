@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-columns">
+
+{% for post in posts %}
+   <a href="{% url 'post_details' post.id %}">
+    <div class="card p-3">
+        <img class="card-img" src="https://fujigrampost.s3.ca-central-1.amazonaws.com/{{ post.photo }}" alt="Card image">
+    </div>
+   </a>
+{% endfor %}
+</div>
+
+{% endblock %}
