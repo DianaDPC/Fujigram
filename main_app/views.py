@@ -10,7 +10,7 @@ from .forms import CommentForm
 
 
 def home(request):
-  return render(request, 'login.html')
+  return render(request, 'registration/login.html')
 
 @login_required
 def posts_index(request):
