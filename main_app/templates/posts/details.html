@@ -1,85 +1,113 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
 <div class="container">
     <div class="row">
-        <div class="col-3">
-            <div class="card w-100 text-center">
-              <div class="card-header">{{post.user}}</div>
-              <div class="card-body">
-                <h5 class="card-title">{{post.camera_used}}</h5>
-                <p class="card-text">{{post.msg_body}}</p>
-                <a href="" class="btn">Recipe</a>
-              </div>
-              <div class="card-footer text-muted">{{post.date_created}}</div>
-            </div>
-          </div>
-        <div class="col">
+        <div class="row m-4">
+            <h1></h1>
+        </div>
+        <div class="col-12" >
             <img class="img-fluid rounded img-height" src="https://fujigrampost.s3.ca-central-1.amazonaws.com/{{ post.photo }}">
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
-
-        </div>
-        <div class="col-9">
-            <form action="{% url 'comment_add' post.id %}" method="post">
+        <div class="card w-100 text-start">
+            <div class="card-header text-center"><i class="fas fa-user-astronaut m-3"></i>{{post.user}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{post.camera_used}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Recipe: {{post.recipe}}</h6>
+              <p class="card-text">{{post.msg_body}}</p>
+              <div class="row text-start">
+                  <table class="table table1-font-size">
+                      <tr>
+                        <td class="property-title"><p>Sensor:</p></td>
+                        <td>{{ post.recipe.sensor }}</td>
+                        <td class="property-title">Dynamic Range:</td>
+                        <td>{{ post.recipe.dynamic_range }}</td>
+                        <td class="property-title">Film Sim:</td>
+                        <td>{{ post.recipe.film_simulation }}</td>
+                        <td class="property-title">MonoChr Col WC:</td>
+                        <td>{{ post.recipe.monochromatic_color_WC }}</td>
+                      </tr>
+                      <tr>
+                        <td class="property-title">MonoChr Col MG:</td>
+                        <td>{{ post.recipe.monochromatic_color_MG }}</td>
+                        <td class="property-title">High Tone:</td>
+                        <td>{{ post.recipe.highlight_tone }}</td>
+                        <td class="property-title">Shad Tone:</td>
+                        <td>{{ post.recipe.shadow_tone }}</td>
+                        <td class="property-title">Color:</td>
+                        <td>{{ post.recipe.color }}</td>
+                      </tr>
+                      <tr>
+                        <td class="property-title">Noise Red:</td>
+                        <td>{{ post.recipe.noise_reduction }}</td>
+                        <td class="property-title">Clarity:</td>
+                        <td>{{ post.recipe.clarity }}</td>
+                        <td class="property-title">Grain Eff:</td>
+                        <td>{{ post.recipe.grain_effect }}</td>
+                        <td class="property-title">Grain Size:</td>
+                        <td>{{ post.recipe.grain_size }}</td>
+                      </tr>
+                      <tr>
+                        <td class="property-title">White Bal:</td>
+                        <td>{{ post.recipe.white_balance }}</td>
+                        <td class="property-title">White Bal Red:</td>
+                        <td>{{ post.recipe.white_balance_shift_red }}</td>
+                        <td class="property-title">White Bal Blue:</td>
+                        <td>{{ post.recipe.white_balance_shift_blue }}</td>
+                        <td class="property-title">Sharpness:</td>
+                        <td>{{ post.recipe.sharpness }}</td>
+                      </tr>
+                      <tr>
+                        <td class="property-title">ISO:</td>
+                        <td>{{ post.recipe.iso }}</td>
+                        <td class="property-title">Exposure:</td>
+                        <td>{{ post.recipe.exposure_compensation }}</td>
+                      </tr>
+                    </table>
+              </div>
+              {% if post.user == request.user %}
+              <a href="{% url 'post_update' post.id %}" class="btn">Edit </a>
+              <a href="{% url 'post_delete' post.id %}"class="btn btn-danger"> Delete</a>
+              {% endif %}
+            </div>
+            <div class="card-footer text-muted">{{post.date_created}}</div>
+          </div>
+    </div>
+    <div class="row mt-4">
+        <div class="form-control col mt-2 mb-2">
+            <form action="{% url 'comment_add' post.id %}" method="post" class="mt-1 mb-2">
                 {% csrf_token %}
-                {{ comment_form.as_p }}
-                <input type="submit" class="btn" value="Submit Comment">
+                {{ comment_form }}
+                <input type="submit" class="btn" value="Post">
             </form>
         </div>
     </div>
+    {% for comment in comments %}
+    <div class="row">
+        <div class="col card mb-2">
+            <div class="card-body">
+            <p>{{comment.msg_body}}</p>
+            <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                <img src="https://png.pngtree.com/png-clipart/20221207/ourmid/pngtree-business-man-avatar-png-image_6514640.png" alt="avatar" width="30"
+                    height="30" />
+                <p class="small mb-0 ms-2">{{comment.user}}</p>
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                {% if comment.user == request.user %}
+                <p class="small  m-1"><a href="{% url 'comment_update' post.id comment.id %}"><i class="fas fa-pen"></i></a></p>
+                <p class="small  m-1"><a href="{% url 'comment_delete' post.id comment.id %}"><i class="far fa-trash-can"></i></a></p>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>  
+    {% endfor %}
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br>
-{{post.user}}
-<br>
-Recipe: {{post.recipe}}
-<br>
-Camera: {{post.camera_used}}
-<br>
-{{post.msg_body}}
-<br>
-{% if post.user == request.user %}
-<a href="{% url 'post_update' post.id %}">Edit </a>
-<a href="{% url 'post_delete' post.id %}"> Delete</a>
-{% endif %}
-
-{% for comment in comments %}
-    <br>
-    <br>
-    {{comment.user}}
-    <br>
-    {{comment.msg_body}}
-    <br>
-    <a href="{% url 'comment_update' post.id comment.id %}">Edit </a>
-    <a href="{% url 'comment_delete' post.id comment.id %}"> Delete</a>
-
-{% endfor %}
-<br>
-<br>
 
 
 

@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+  <div class="container mt-5">
+    <h1>Delete Comment</h1>
 
-  <h1>Delete Comment</h1>
+    <h4>Are you sure you want to delete {{ object.name }}?</h4>
 
-  <h4>Are you sure you want to delete {{ object.name }}?</h4>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Yes - Delete!" class="btn btn-danger">
+      <a href="{% url 'posts_index' %}">Cancel</a>
+    </form>
 
-  <form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'posts_index' %}">Cancel</a>
-  </form>
+  </div>
 
 {% endblock %}

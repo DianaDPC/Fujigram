@@ -36,9 +36,10 @@ def signup(request):
 @login_required
 def post_details(request, post_id):
   post=Post.objects.get(id=post_id)
+  recipe = Recipe.objects.get(id=post.recipe.id)
   comments=post.comment_set.all()
   comment_form = CommentForm()
-  return render(request, 'posts/details.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+  return render(request, 'posts/details.html', {'post': post, 'comments': comments, 'comment_form': comment_form, 'recipe':recipe})
 
 class PostCreate(LoginRequiredMixin, CreateView):
   model = Post
@@ -51,7 +52,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
   model = Post
-  fields = ['camera_used', 'msg_body']
+  fields = ['camera_used', 'msg_body', 'recipe']
 
   def test_func(self):
     obj = self.get_object()
