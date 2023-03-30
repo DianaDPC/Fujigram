@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 style="text-align: center;">Recipes</h1>
+<h1 style="text-align: center;" class="mt-4">Recipes</h1>
 <div class="card-columns container-fluid">
 <div class="row justify-content-center">
 {% for recipe in recipes %}
 
-  <div style="height: 200px; width: 244px;" class="card p-3 text-center">
+  <div class="card p-3 m-2 text-center" style= "height: 180px; width: 280px;" >
     <div class="card-body">
       <a style="color: black;" href="{% url 'recipe_details' recipe.id %}"><h5 class="card-title">{{ recipe.name }}</h5></a>
       <p class="card-text">Sensor Type: {{ recipe.sensor }}</p>

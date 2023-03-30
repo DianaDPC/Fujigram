@@ -2,32 +2,58 @@
 {% block content %}
 
 <div class="container">
-    <div class="row" style="margin: 40px 0;">
+    <div class="row mt-5">
             <div class="card text-center">
-              <div class="card-header">{{recipe.name}}</div>
+              <div class="card-header mt-2 "><h4>{{recipe.name}}</h4></div>
               <div class="card-body">
-                <h5 class="card-title">Senser: {{recipe.sensor}}</h5>
-                <p class="card-text">Dynamic Range: {{recipe.dynamic_range}}</p>
-                <p class="card-text">Film Simulation: {{recipe.film_simulation}}</p>
-                <p class="card-text">Monohromatic Color WC: {{recipe.monochromatic_color_WC}}</p>
-                <p class="card-text">Monohromatic Color MG: {{recipe.monochromatic_color_MG}}</p>
-                <p class="card-text">Highlight Tone: {{recipe.highlight_tone}}</p>
-                <p class="card-text">Shadow Tone: {{recipe.shadow_tone}}</p>
-                <p class="card-text">Color: {{recipe.color}}</p>
-                <p class="card-text">Noise Reduction: {{recipe.noise_reduction}}</p>
-                <p class="card-text">Clarity: {{recipe.clarity}}</p>
-                <p class="card-text">Grain effect: {{recipe.grain_effect}}</p>
-                <p class="card-text">Grain size: {{recipe.grain_size}}</p>
-                <p class="card-text">Color Chrome Effect: {{recipe.color_chrome_effect}}</p>
-                <p class="card-text">White Balance: {{recipe.white_balance}}</p>
-                <p class="card-text">White Balance Shift Red: {{recipe.white_balance_shift_red}}</p>
-                <p class="card-text">White Balance Shift Blue: {{recipe.white_balance_shift_blue}}</p>
-                <p class="card-text">Sharpness: {{recipe.sharpness}}</p>
-                <p class="card-text">Long Exposure Nr: {{recipe.long_exposure_nr}}</p>
-                <p class="card-text">Lens Modulation Optimizer: {{recipe.lens_modulation_optimizer}}</p>
-                <p class="card-text">Color Space: {{recipe.color_space}}</p>
-                <p class="card-text">ISO: {{recipe.iso}}</p>
-                <p class="card-text">Exposure Compensation: {{recipe.exposure_compensation}}</p>
+                <table class="table table1-font-size">
+                  <tr>
+                    <td class="property-title"><p>Sensor:</p></td>
+                    <td>{{ recipe.sensor }}</td>
+                    <td class="property-title">Dynamic Range:</td>
+                    <td>{{ recipe.dynamic_range }}</td>
+                    <td class="property-title">Film Sim:</td>
+                    <td>{{ recipe.film_simulation }}</td>
+                    <td class="property-title">MonoChr Col WC:</td>
+                    <td>{{ recipe.monochromatic_color_WC }}</td>
+                  </tr>
+                  <tr>
+                    <td class="property-title">MonoChr Col MG:</td>
+                    <td>{{ recipe.monochromatic_color_MG }}</td>
+                    <td class="property-title">High Tone:</td>
+                    <td>{{ recipe.highlight_tone }}</td>
+                    <td class="property-title">Shad Tone:</td>
+                    <td>{{ recipe.shadow_tone }}</td>
+                    <td class="property-title">Color:</td>
+                    <td>{{ recipe.color }}</td>
+                  </tr>
+                  <tr>
+                    <td class="property-title">Noise Red:</td>
+                    <td>{{ recipe.noise_reduction }}</td>
+                    <td class="property-title">Clarity:</td>
+                    <td>{{ recipe.clarity }}</td>
+                    <td class="property-title">Grain Eff:</td>
+                    <td>{{ recipe.grain_effect }}</td>
+                    <td class="property-title">Grain Size:</td>
+                    <td>{{ recipe.grain_size }}</td>
+                  </tr>
+                  <tr>
+                    <td class="property-title">White Bal:</td>
+                    <td>{{ recipe.white_balance }}</td>
+                    <td class="property-title">White Bal Red:</td>
+                    <td>{{ recipe.white_balance_shift_red }}</td>
+                    <td class="property-title">White Bal Blue:</td>
+                    <td>{{ recipe.white_balance_shift_blue }}</td>
+                    <td class="property-title">Sharpness:</td>
+                    <td>{{ recipe.sharpness }}</td>
+                  </tr>
+                  <tr>
+                    <td class="property-title">ISO:</td>
+                    <td>{{ recipe.iso }}</td>
+                    <td class="property-title">Exposure:</td>
+                    <td>{{recipe.exposure_compensation }}</td>
+                  </tr>
+                </table>
               </div>
               <div class="card-footer text-muted">Submitted by:{{recipe.user}}</div>
             </div>
