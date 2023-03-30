@@ -6,7 +6,7 @@
 <div class="row justify-content-center">
 {% for recipe in recipes %}
 
-  <div class="card p-3" style= "height: 200px; width: 200px;" >
+  <div style="height: 200px; width: 244px;" class="card p-3 text-center">
     <div class="card-body">
       <a style="color: black;" href="{% url 'recipe_details' recipe.id %}"><h5 class="card-title">{{ recipe.name }}</h5></a>
       <p class="card-text">Sensor Type: {{ recipe.sensor }}</p>
