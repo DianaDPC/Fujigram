@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand" style="background: #EEE9DA;">
+       <nav class="navbar navbar-expand" style="background: #EEE9DA;">
             <div class="container">
                 <a href="{% url 'posts_index' %}" class="navbar-brand brand-title">Fujigram</a>
                 <div >
@@ -31,7 +31,6 @@
                     </form>
                 </div>
                 <ul class="navbar-nav">
-
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                          <a class='nav-link'  href="{% url 'recipes_create' %}"><i class="fas fa-mortar-pestle"></i></a>
