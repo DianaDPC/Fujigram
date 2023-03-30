@@ -79,6 +79,7 @@ WSGI_APPLICATION = 'fujigram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,6 +90,7 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT')
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
