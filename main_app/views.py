@@ -69,6 +69,7 @@ class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class RecipeCreate(LoginRequiredMixin, CreateView):
   model = Recipe
   fields = ['name','sensor','dynamic_range','film_simulation','monochromatic_color_WC','monochromatic_color_MG','highlight_tone','shadow_tone','color','noise_reduction','clarity','grain_effect','grain_size','color_chrome_effect','white_balance','white_balance_shift_red','white_balance_shift_blue','sharpness','long_exposure_nr','lens_modulation_optimizer','color_space','iso','exposure_compensation']
+  success_url = '/recipes/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -131,4 +132,9 @@ def search_index(request):
     posts=Recipe.objects.annotate(
     search=SearchVector('name', 'sensor'),
     ).get(search=q).post_set.all()
-  return render(request, 'posts/index.html', {'posts':posts})
+  return render(request, 'posts/index.html', {'posts':posts}) # 'posts/search.html' after maybe?
+
+@login_required
+def recipe_details(request, recipe_id):
+  recipe=Recipe.objects.get(id=recipe_id)
+  return render(request, 'recipes/details.html', {'recipe': recipe})

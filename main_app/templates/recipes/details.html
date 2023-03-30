@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+            <div class="card text-center">
+              <div class="card-header">{{recipe.name}}</div>
+              <div class="card-body">
+                <h5 class="card-title">Senser: {{recipe.sensor}}</h5>
+                <p class="card-text">Dynamic Range: {{recipe.dynamic_range}}</p>
+                <p class="card-text">Film Simulation: {{recipe.film_simulation}}</p>
+                <p class="card-text">Monohromatic Color WC: {{recipe.monochromatic_color_WC}}</p>
+                <p class="card-text">Monohromatic Color MG: {{recipe.monochromatic_color_MG}}</p>
+                <p class="card-text">Highlight Tone: {{recipe.highlight_tone}}</p>
+                <p class="card-text">Shadow Tone: {{recipe.shadow_tone}}</p>
+                <p class="card-text">Color: {{recipe.color}}</p>
+                <p class="card-text">Noise Reduction: {{recipe.noise_reduction}}</p>
+                <p class="card-text">Clarity: {{recipe.clarity}}</p>
+                <p class="card-text">Grain effect: {{recipe.grain_effect}}</p>
+                <p class="card-text">Grain size: {{recipe.grain_size}}</p>
+                <p class="card-text">Color Chrome Effect: {{recipe.color_chrome_effect}}</p>
+                <p class="card-text">White Balance: {{recipe.white_balance}}</p>
+                <p class="card-text">White Balance Shift Red: {{recipe.white_balance_shift_red}}</p>
+                <p class="card-text">White Balance Shift Blue: {{recipe.white_balance_shift_blue}}</p>
+                <p class="card-text">Sharpness: {{recipe.sharpness}}</p>
+                <p class="card-text">Long Exposure Nr: {{recipe.long_exposure_nr}}</p>
+                <p class="card-text">Lens Modulation Optimizer: {{recipe.lens_modulation_optimizer}}</p>
+                <p class="card-text">Color Space: {{recipe.color_space}}</p>
+                <p class="card-text">ISO: {{recipe.iso}}</p>
+                <p class="card-text">Exposure Compensation: {{recipe.exposure_compensation}}</p>
+              </div>
+              <div class="card-footer text-muted">Submitted by:{{recipe.user}}</div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
