@@ -10,11 +10,15 @@
     <div class="row m-5">
         <div class="col-3">
           <div class="card w-100 text-center">
-            <div class="card-header">{{post.user}}</div>
+            <div class="card-header"><i class="fas fa-user-tie m-3 "></i>{{post.user}}</div>
             <div class="card-body">
               <h5 class="card-title">{{post.camera_used}}</h5>
               <p class="card-text">{{post.msg_body}}</p>
-              <a href="" class="btn">Recipe</a>
+              <p class="card-text">{{post.recipe}}</p>
+              {% if post.user == request.user %}
+              <a href="{% url 'post_update' post.id %}" class="btn">Edit </a>
+              <a href="{% url 'post_delete' post.id %}"class="btn"> Delete</a>
+              {% endif %}
             </div>
             <div class="card-footer text-muted">{{post.date_created}}</div>
           </div>
@@ -24,7 +28,6 @@
         </div>
     </div>
   </div>
-
   {% endfor %}
 </div>
 

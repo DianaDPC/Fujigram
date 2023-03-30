@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 COLOR_SPACE = (
     ('sRGB','sRGB'), 
     ('Adobe RGB','Adobe RGB')
@@ -99,7 +100,7 @@ class Recipe(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('home')
+        return reverse('recipes_index')
 
 class Post(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
