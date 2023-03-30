@@ -5,20 +5,20 @@
 <section style=" height: 100vh; background-image: url('https://i.imgur.com/gpqP3RC.jpg');" class="text-center">
 
 <div class="p-5 bg-image" ></div>
-  <div class="card mx-md-5 shadow-2-strong" style="margin-top: -50px; background: hsla(0, 0%, 100%, 0.4); backdrop-filter: blur(30px); ">
-    <div class="card-body py-5 px-md-5">
+  <div class="card mx-md-5 shadow-2-strong" style=" background: hsla(0, 0%, 100%, 0.4); backdrop-filter: blur(30px); ">
+    <div class="card-body">
       <div class="row d-flex justify-content-center">
-        <div class="col-lg-8">
+        <div class="col">
           {% if object %}
           <h1>Edit {{object.name}}</h1>
-        {% else %}
+          {% else %}
           <h1>Create Post</h1>
-        {% endif %}
+          {% endif %}
             <div class="form-outline mb-4 text-center">
-              <form style="text-align:justify; margin-top: 10px;" action="" method="post" enctype="multipart/form-data">
+              <form style="margin-top: 10px;" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <table>
-                  {{ form.as_table }}
+                <table class="table">
+                  {{ form }}
                 </table>
                 <input type="submit" value="Submit" class="btn btn-secondary">
               </form>
@@ -30,22 +30,3 @@
 </section>
 
 {% endblock %}
-
-<p class="card-text">Sensor: {{ post.recipe.sensor }}</p>
-<p class="card-text">Dynamic Range: {{ post.recipe.dynamic_range }}</p>
-<p class="card-text">Film Sim: {{ post.recipe.film_simulation }}</p>
-<p class="card-text">MonoChr Col WC: {{ post.recipe.monochromatic_color_WC }}</p>
-<p class="card-text">MonoChr Col MG: {{ post.recipe.monochromatic_color_MG }}</p>
-<p class="card-text">High Tone: {{ post.recipe.highlight_tone }}</p>
-<p class="card-text">Shad Tone: {{ post.recipe.shadow_tone }}</p>
-<p class="card-text">Color: {{ post.recipe.color }}</p>
-<p class="card-text">Noise Red: {{ post.recipe.noise_reduction }}</p>
-<p class="card-text">Clarity: {{ post.recipe.clarity }}</p>
-<p class="card-text">Grain Eff: {{ post.recipe.grain_effect }}</p>
-<p class="card-text">Grain Size: {{ post.recipe.grain_size }}</p>
-<p class="card-text">White Bal: {{ post.recipe.white_balance }}</p>
-<p class="card-text">White Bal Red: {{ post.recipe.white_balance_shift_red }}</p>
-<p class="card-text">White Bal Red: {{ post.recipe.white_balance_shift_blue }}</p>
-<p class="card-text">Sharpness: {{ post.recipe.sharpness }}</p>
-<p class="card-text">ISO: {{ post.recipe.iso }}</p>
-<p class="card-text">Exposure: {{ post.recipe.exposure_compensation }}</p>
